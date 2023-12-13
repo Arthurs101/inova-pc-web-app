@@ -4,7 +4,9 @@
     <h2 class="light-header">Inicio de sesion</h2>
 
     <form class="login-form"action="/login" method="post" >
-
+    <figure>
+      <img src="../../assets/logos/logo-innova.png">
+    </figure>
     <div class="form-group">
       <input style="margin-top: 50px" type="email" class="form-control input-text" id="email" name="email" placeholder="Email"  required>
     </div>
@@ -13,9 +15,8 @@
       <input style="margin-top: 20px" type="password" class="form-control input-text" id="password" name="password" placeholder="Contraseña" required>
     </div>
 
-    <button type="submit" class="simple-button" style="width: 320px; height: 35px; margin-top: 50px;" >Inicio de sesion</button>
-
-    <!-- <a href="#">Forgot password?</a> -->
+    <button type="submit" class="simple-button" style="width: 320px; height: 35px; margin-top: 50px;" (click)="loginProcedure()" >Inicio de sesion</button>
+    <button class="uk-button-text">he olvidado la contraseña</button>
 
     </form>
 

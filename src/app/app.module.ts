@@ -5,12 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { NotFoundComponent } from './NotFound/NotFound.component';
+import { MainDashboardComponent } from './main-dashboard/main-dashboard.component';
 
 @NgModule({
-  declarations: [		
+  declarations: [			
     AppComponent,
       LoginComponent,
-      NotFoundComponent
+      NotFoundComponent,
+      MainDashboardComponent
    ],
   imports: [
     BrowserModule,
