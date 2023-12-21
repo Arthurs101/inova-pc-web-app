@@ -1,8 +1,8 @@
+@import '../../styles/colors.scss';
+
 .panel-display{
-  position: fixed;
-  left: 180px;
-  top: 60px;
-  padding: 10px;
+    margin-left: 180px;
+    margin-top: 60px;
 }
 .main-header{
   position: fixed;
@@ -17,6 +17,7 @@
   padding-right: 10px;
   gap: 10px;
   box-shadow: grey 0px 2px ;
+  background-color: white;
 }
 #hambuerger-menu{
   width: 40px;
@@ -27,6 +28,9 @@
 @media (max-width: 900px) {
   .panel-display, .main-header{
     left: 0;
+  }
+  .panel-display{
+    margin-left: 0;
   }
   #hambuerger-menu{
     display: unset;

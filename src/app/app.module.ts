@@ -6,13 +6,14 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { NotFoundComponent } from './NotFound/NotFound.component';
 import { MainDashboardComponent } from './main-dashboard/main-dashboard.component';
-
+import {InventoryPanelComponent} from './Panels/inventory-panel/inventory-panel.component';
 @NgModule({
-  declarations: [			
+  declarations: [
     AppComponent,
       LoginComponent,
       NotFoundComponent,
-      MainDashboardComponent
+      MainDashboardComponent,
+      InventoryPanelComponent
    ],
   imports: [
     BrowserModule,

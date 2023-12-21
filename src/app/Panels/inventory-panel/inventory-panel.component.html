@@ -1,0 +1,41 @@
+<div class="panel-container">
+  <!-- panel headline -->
+  <div class="panel-divider">
+    <h1> Inventario </h1>
+  </div>
+  <hr>
+  <!-- panel content -->
+  <div class="panel-content">
+    <div class="card-container">
+      <div class="chart-container">
+        <table class="responsive-table">
+          <thead>
+            <tr>
+              <td></td>
+              <td>codigo</td>
+              <td>nombre</td>
+              <td>categoria</td>
+              <td>tipo</td>
+              <td>ubicacion</td>
+              <td>disponibles</td>
+              <td></td>
+            </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let product of products">
+                <td></td>
+                <td>{{product.codigo}}</td>
+                <td>{{product.nombre}}</td>
+                <td>{{product.categoria}}</td>
+                <td>{{product.tipo}}</td>
+                <td>{{product.ubicacion}}</td>
+                <td>{{product.disponibles}}</td>
+                <td></td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>

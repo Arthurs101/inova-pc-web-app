@@ -1,9 +1,9 @@
 <!-- header -->
 
 <div class="main-header">
-    <img id ="hambuerger-menu" src="../../assets/icons/menu.svg">
+    <img id ="hambuerger-menu" src="../../assets/icons/menu.svg" (click)="setMenu()">
     <p>
-      Something else
+
     </p>
 </div>
 
@@ -14,9 +14,25 @@
 <aside id="left-navbar" class="navbar left">
   <img src="../../assets/logos/logo-innova.png">
   <div class="content-box vertical">
-    <div class="navbar option">
+    <div class="navbar option {{ nav === 0 ? 'active' : '' }}" (click)="setNav(0)">
       <img class="svg" src="../../assets/icons/principal.svg">
       <h2>Principal</h2>
+    </div>
+    <div class="navbar option {{ nav === 1 ? 'active' : '' }}" (click)="setNav(1)">
+      <img class="svg" src="../../assets/icons/principal.svg">
+      <h2>Finanzas</h2>
+    </div>
+    <div class="navbar option {{ nav === 2 ? 'active' : '' }}" (click)="setNav(2)">
+      <img class="svg" src="../../assets/icons/principal.svg">
+      <h2>Transacciones</h2>
+    </div>
+    <div class="navbar option {{ nav === 3 ? 'active' : '' }}" (click)="setNav(3)">
+      <img class="svg" src="../../assets/icons/principal.svg">
+      <h2>Inventario</h2>
+    </div>
+    <div class="navbar option {{ nav === 4 ? 'active' : '' }}" (click)="setNav(4)">
+      <img class="svg" src="../../assets/icons/principal.svg">
+      <h2>Tiendas</h2>
     </div>
   </div>
 </aside>
@@ -27,9 +43,7 @@
 <!-- Main container -->
 
 <div class="panel-display">
-  <p>
-    this is the panel panel-display
-  </p>
+  <app-inventory-panel></app-inventory-panel>
 </div>
 
 <!-- /Main container -->

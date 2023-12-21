@@ -1,12 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-$headlight-light-blue: #D7EEF4;
-$accent-blue: rgb(80, 209, 242);
-$royal-blue: #39AAC5;
-$silver-blue: #222A30;
-$deep-blue: #0E4974FF;
-$deep-blue-gradient: linear-gradient(0deg, #000000FF 10%, #0E4974FF 83%);
-$highlight-orange: #EDA84B;
-
+@import "colors.scss";
 @font-face {
   font-family: 'Inder';
   src: url(/src/assets/fonts/Inder-Regular.ttf);
@@ -14,6 +7,7 @@ $highlight-orange: #EDA84B;
 
 body{
   margin: 0;
+  background: $soft-grey;
 }
 
 .light-header{
@@ -67,7 +61,7 @@ body{
     }
     & h2{
       font-family: 'Inder';
-      font-size: 20px !important;
+      font-size: 14px !important;
       font-weight: lighter !important;
     }
     display: flex;
@@ -78,6 +72,7 @@ body{
     border-radius: 5rem;
     &.active{
       background-color: $royal-blue !important;
+      border: $accent-blue 2px solid !important;
       color: black !important;
       & .svg{
         filter: none;
@@ -93,15 +88,86 @@ body{
     }
   }
 }
-.panel-display{
+// tables and its elements
+.responsive-table{
   width: 100%;
-  height: 100%;
+  max-width: none;
+  overflow: scroll;
+  white-space: normal;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-family: 'Inder';
+  font-weight: lighter;
+  & thead{
+    text-transform: uppercase;
+    border-bottom: 1px solid $light-grey;
+    color: $deep-blue !important;
+    padding-bottom: 5px;
+  }
+  & tbody{
+    & tr{
+      border-bottom: 1px solid $light-grey;
+      &:hover{
+        background-color: $light-grey-blue;
+      }
+      &:nth-last-of-type(even){
+        background-color: $soft-grey;
+      }
+    }
+  }
+  & th, & td{
+    padding-left:20px;
+    padding-right:20px;
+  }
+}
+
+// containers
+.panel-container{
+  padding-top: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.card-container{
+  background: white;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-radius: 1rem;
+  padding: 10px;
+}
+.chart-container{
+  height: 60vh;
+  margin: 0;
+  overflow: auto;
 }
 @media (max-width: 900px) {
   .navbar{
     &.left{
       display: none;
     }
+  }
+  .panel-display{
+    width: 100%;
+  }
+  .responsive-table{
+    display: flex;
+    flex-direction: column;
+    & thead{
+      display: none;
+    }
+    th,
+    td {
+      width: auto!important;
+      display: flex;
+      flex-direction: column;
+      max-width: none !important;
+      min-width: 0 !important;
+      overflow: visible !important;
+      white-space: normal !important;
+  }
+  tr{
+    display: block;
+  }
+
   }
 }
 
