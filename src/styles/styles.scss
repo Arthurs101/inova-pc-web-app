@@ -16,12 +16,23 @@ body{
   color: black;
   font-size: 40px;
   }
+
 .simple-button{
   border-radius: 5rem;
   background-color: white;
   border-color: $royal-blue;
   &:hover{
     background-color: $headlight-light-blue;
+  }
+}
+.btn-pagination{
+  border-radius: 2rem;
+  padding: 5px 10px;
+  border: 2px solid;
+  border-color: $light-grey-blue;
+  &:hover{
+    background-color: $light-grey-blue;
+    color: black;
   }
 }
 .content-box{
@@ -105,6 +116,10 @@ body{
     padding-bottom: 5px;
   }
   & tbody{
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: $silver-blue;
     & tr{
       border-bottom: 1px solid $light-grey;
       &:hover{
@@ -116,8 +131,21 @@ body{
     }
   }
   & th, & td{
-    padding-left:20px;
-    padding-right:20px;
+    padding: 20px 10px;
+  }
+}
+.select-header-table{
+  font-family: 'Inder';
+  font-weight: lighter;
+  text-transform: uppercase;
+  border-color: $light-grey-blue;
+  color: $deep-blue !important;
+  padding: 10px;
+  &.round{
+    border-radius: 3rem !important;
+  }
+  &.no-border{
+    border: transparent !important;
   }
 }
 
@@ -139,6 +167,17 @@ body{
   margin: 0;
   overflow: auto;
 }
+.pagination{
+  color: #666;
+  font-family: 'Inder';
+  font-weight: bold !important;
+  font-size: 20px;
+&.center-flex{
+  display: flex !important;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}}
 @media (max-width: 900px) {
   .navbar{
     &.left{

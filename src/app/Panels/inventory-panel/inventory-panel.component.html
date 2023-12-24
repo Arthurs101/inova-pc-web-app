@@ -7,6 +7,13 @@
   <!-- panel content -->
   <div class="panel-content">
     <div class="card-container">
+      <div id="options-bar">
+        <select name="" id="" class="select-header-table" [(ngModel)]="itemsPerPage" (ngModelChange)="repaginate()" [value]="5">
+          <option [value]="5">5 por página</option>
+          <option [value]="10">10 por página</option>
+          <option [value]="15">15 por página</option>
+        </select>
+      </div>
       <div class="chart-container">
         <table class="responsive-table">
           <thead>
@@ -14,7 +21,12 @@
               <td></td>
               <td>codigo</td>
               <td>nombre</td>
-              <td>categoria</td>
+              <td>
+                <select name="" id="" class="select-header-table no-border" [(ngModel)]="filters.category" (ngModelChange)="onFilter()">
+                  <option value="0">categoria</option>
+                  <option *ngFor="let cat of categories" [value]="cat">{{cat}}</option>
+                </select>
+              </td>
               <td>tipo</td>
               <td>ubicacion</td>
               <td>disponibles</td>
@@ -22,7 +34,7 @@
             </tr>
           </thead>
           <tbody>
-              <tr *ngFor="let product of products">
+              <tr *ngFor="let product of data">
                 <td></td>
                 <td>{{product.codigo}}</td>
                 <td>{{product.nombre}}</td>
@@ -38,4 +50,13 @@
     </div>
 
   </div>
+
+  <!-- pagination buttons -->
+  <ul class="pagination center-flex" uk-margin>
+    <button type="button" class="btn-pagination " [disabled]="currentPage===1" (click)="returnFirstPage()" >Inicio</button>
+    <button type="button" class="btn-pagination " [disabled]="currentPage === 1" (click)="prevPage()">Anterior</button>
+    <span class="pagination-indicator">{{ currentPage }} / {{ totalPages }}</span>
+    <button type="button" class="btn-pagination" [disabled]="currentPage === totalPages" (click)="nextPage()">Siguiente</button>
+    <button type="button" class="btn-pagination" [disabled]="currentPage === totalPages" (click)="returnLastPage()">Final</button>
+  </ul>
 </div>
