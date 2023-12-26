@@ -111,6 +111,7 @@ export class InventoryPanelComponent implements OnInit {
         this.categories.push(prod.categoria)
       }
     })
+    this.data = this.filtered.slice(this.minIndex,this.maxIndex)
   }
 
   get totalPages(): number {
@@ -127,36 +128,38 @@ export class InventoryPanelComponent implements OnInit {
   }
 
   returnFirstPage() {
-    this.currentPage = 1
-    this.maxIndex = this.itemsPerPage;
+    this.currentPage = 1;
+    this.maxIndex = Math.min(Number(this.itemsPerPage), this.filtered.length);
     this.minIndex = 0;
-    this.data = this.filtered.slice(this.minIndex, this.maxIndex)
-  }
-  returnLastPage() {
-    this.currentPage = this.totalPages
-    this.maxIndex = this.products.length;
-    this.minIndex = this.products.length-this.itemsPerPage;
-    this.data = this.filtered.slice(this.minIndex, this.maxIndex)
-  }
-  nextPage() {
-    if (this.currentPage !== this.totalPages){
-      this.currentPage +=1
-      this.maxIndex+=this.itemsPerPage
-      this.minIndex+=this.itemsPerPage
-      this.data = this.filtered.slice(this.minIndex, this.maxIndex)
-    }
-  }
-  prevPage() {
-    if (this.currentPage !== 1) {
-      this.currentPage -=1
-      this.maxIndex-=this.itemsPerPage
-      this.minIndex-=this.itemsPerPage
-      this.data = this.filtered.slice(this.minIndex, this.maxIndex)
-    }
-  }
-  repaginate(){
-    console.log(this.itemsPerPage)
-    this.returnFirstPage()
+    this.data = this.filtered.slice(this.minIndex, this.maxIndex);
   }
 
+  returnLastPage() {
+    this.currentPage = this.totalPages;
+    this.maxIndex = this.filtered.length;
+    this.minIndex = Math.max(0, this.maxIndex - Number(this.itemsPerPage));
+    this.data = this.filtered.slice(this.minIndex, this.maxIndex);
+  }
+
+  nextPage() {
+    if (this.currentPage !== this.totalPages){
+      this.currentPage += 1;
+      this.minIndex += Number(this.itemsPerPage);
+      this.maxIndex = Math.min(this.minIndex + Number(this.itemsPerPage), this.filtered.length);
+      this.data = this.filtered.slice(this.minIndex, this.maxIndex);
+    }
+  }
+
+  prevPage() {
+    if (this.currentPage !== 1) {
+      this.currentPage -= 1;
+      this.maxIndex = this.minIndex;
+      this.minIndex = Math.max(0, this.minIndex - Number(this.itemsPerPage));
+      this.data = this.filtered.slice(this.minIndex, this.maxIndex);
+    }
+  }
+
+  repaginate(){
+    this.returnFirstPage();
+  }
 }

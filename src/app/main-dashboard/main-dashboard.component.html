@@ -19,20 +19,32 @@
       <h2>Principal</h2>
     </div>
     <div class="navbar option {{ nav === 1 ? 'active' : '' }}" (click)="setNav(1)">
-      <img class="svg" src="../../assets/icons/principal.svg">
+      <img class="svg" src="../../assets/icons/coins.svg">
       <h2>Finanzas</h2>
     </div>
     <div class="navbar option {{ nav === 2 ? 'active' : '' }}" (click)="setNav(2)">
-      <img class="svg" src="../../assets/icons/principal.svg">
+      <img class="svg" src="../../assets/icons/portfolio-clock.svg">
       <h2>Transacciones</h2>
     </div>
     <div class="navbar option {{ nav === 3 ? 'active' : '' }}" (click)="setNav(3)">
-      <img class="svg" src="../../assets/icons/principal.svg">
+      <img class="svg" src="../../assets/icons/shelves.svg">
       <h2>Inventario</h2>
     </div>
     <div class="navbar option {{ nav === 4 ? 'active' : '' }}" (click)="setNav(4)">
-      <img class="svg" src="../../assets/icons/principal.svg">
+      <img class="svg" src="../../assets/icons/store.svg">
       <h2>Tiendas</h2>
+    </div>
+    <div class="navbar option {{ nav === 5 ? 'active' : '' }}" (click)="setNav(5)">
+      <img class="svg" src="../../assets/icons/ID.svg">
+      <h2>Empleados</h2>
+    </div>
+    <div class="navbar option {{ nav === 6 ? 'active' : '' }}" (click)="setNav(6)">
+      <img class="svg" src="../../assets/icons/usuarios-alt.svg">
+      <h2>Clientes</h2>
+    </div>
+    <div class="navbar option {{ nav === 7 ? 'active' : '' }}" (click)="setNav(7)">
+      <img class="svg" src="../../assets/icons/cinta-transportadora.svg">
+      <h2>Proveedores</h2>
     </div>
   </div>
 </aside>
@@ -48,4 +60,47 @@
 
 <!-- /Main container -->
 
+<!-- offcanvas -->
+<div class="navbar offcanvas" *ngIf="hamburger">
+  <div class="navbar option {{ nav === 4 ? 'active' : '' }}" (click)="setMenu()">
+    <img class="svg" src="../../assets/icons/xmark.svg">
+    <h2>Cerrar Menu</h2>
+  </div>
+
+  <img src="../../assets/logos/logo-innova.png">
+  <div class="content-box vertical">
+    <div class="navbar option {{ nav === 0 ? 'active' : '' }}" (click)="setNav(0)">
+      <img class="svg" src="../../assets/icons/principal.svg">
+      <h2>Principal</h2>
+    </div>
+    <div class="navbar option {{ nav === 1 ? 'active' : '' }}" (click)="setNav(1)">
+      <img class="svg" src="../../assets/icons/coins.svg">
+      <h2>Finanzas</h2>
+    </div>
+    <div class="navbar option {{ nav === 2 ? 'active' : '' }}" (click)="setNav(2)">
+      <img class="svg" src="../../assets/icons/portfolio-clock.svg">
+      <h2>Transacciones</h2>
+    </div>
+    <div class="navbar option {{ nav === 3 ? 'active' : '' }}" (click)="setNav(3)">
+      <img class="svg" src="../../assets/icons/shelves.svg">
+      <h2>Inventario</h2>
+    </div>
+    <div class="navbar option {{ nav === 4 ? 'active' : '' }}" (click)="setNav(4)">
+      <img class="svg" src="../../assets/icons/store.svg">
+      <h2>Tiendas</h2>
+    </div>
+    <div class="navbar option {{ nav === 5 ? 'active' : '' }}" (click)="setNav(5)">
+      <img class="svg" src="../../assets/icons/ID.svg">
+      <h2>Empleados</h2>
+    </div>
+    <div class="navbar option {{ nav === 6 ? 'active' : '' }}" (click)="setNav(6)">
+      <img class="svg" src="../../assets/icons/usuarios-alt.svg">
+      <h2>Clientes</h2>
+    </div>
+    <div class="navbar option {{ nav === 7 ? 'active' : '' }}" (click)="setNav(7)">
+      <img class="svg" src="../../assets/icons/cinta-transportadora.svg">
+      <h2>Proveedores</h2>
+    </div>
+  </div>
+</div>
 

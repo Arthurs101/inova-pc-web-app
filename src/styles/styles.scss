@@ -4,7 +4,7 @@
   font-family: 'Inder';
   src: url(/src/assets/fonts/Inder-Regular.ttf);
 }
-
+//elements
 body{
   margin: 0;
   background: $soft-grey;
@@ -98,6 +98,52 @@ body{
       }
     }
   }
+  &.offcanvas{
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    padding-top: 20px;
+  }
+}
+.search-bar{
+  box-sizing: border-box;
+  /* 2 */
+  margin: 0;
+  /* 3 */
+  border-radius: 0;
+  /* 4 */
+  font: inherit;
+  /* 5 */
+  overflow: visible;
+  /* 6 */
+  -webkit-appearance: none;
+  /* 7 */
+  vertical-align: middle;
+  /* 8 */
+  width: 100%;
+  /* 9 */
+  border: solid 1px $light-grey;
+  color: #666;
+  padding: 10px;
+  padding-right:40px ;
+}
+.search-icon{
+  position: absolute;
+  top:0;
+  right: 0;
+  padding: 10px;
+  filter: $grey-filter;
+ &.small{
+  height: 20px;
+  width: 20px;
+ }
 }
 // tables and its elements
 .responsive-table{
@@ -122,11 +168,21 @@ body{
     color: $silver-blue;
     & tr{
       border-bottom: 1px solid $light-grey;
+      & td.product-image{
+        & img{
+        max-width: 80px;
+        max-height: 80px;
+        border-radius: 1rem;
+        }
+      }
       &:hover{
         background-color: $light-grey-blue;
       }
       &:nth-last-of-type(even){
         background-color: $soft-grey;
+        &:hover{
+          background-color: $light-grey-blue;
+        }
       }
     }
   }
@@ -167,6 +223,21 @@ body{
   margin: 0;
   overflow: auto;
 }
+.search-bar-form{
+  display: inline-block;
+  /* 2 */
+  position: relative;
+  /* 3 */
+  max-width: 100%;
+  /* 4 */
+  margin: 0;
+}
+.options-bar{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+}
 .pagination{
   color: #666;
   font-family: 'Inder';
@@ -204,7 +275,20 @@ body{
       white-space: normal !important;
   }
   tr{
-    display: block;
+    & td.product-image{
+      grid-area: "product-image";
+    }
+    & td.product-attribute{
+      grid-area: "product-attribute";
+    }
+    & td.product-actions{
+      grid-area: "product-actions";
+    }
+    display: grid;
+    grid-template-areas: "product-image product-attribute product-attribute"
+                         "product-image product-attribute product-attribute"
+                         "product-image product-attribute product-attribute"
+                         "product-actions product-actions product-actions";
   }
 
   }
