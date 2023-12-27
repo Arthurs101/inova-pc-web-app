@@ -9,7 +9,17 @@ body{
   margin: 0;
   background: $soft-grey;
 }
-
+.svg{
+  height: 20px;
+  width: 20px;
+  padding: 10px;
+  border-radius: 10%;
+  filter: $grey-filter;
+  &.active{
+    filter: none !important;
+    background-color: $accent-blue;
+  }
+}
 .light-header{
   font-family: 'Inder';
   font-weight: lighter;
@@ -21,8 +31,19 @@ body{
   border-radius: 5rem;
   background-color: white;
   border-color: $royal-blue;
+  padding: 10px 10px 10px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   &:hover{
     background-color: $headlight-light-blue;
+  }
+  &.square{
+    border-radius: 10%;
+  }
+  &.medium{
+    height: 40px;
   }
 }
 .btn-pagination{
@@ -38,6 +59,7 @@ body{
 .content-box{
   display: flex;
  &.vertical{
+  gap: 1rem;
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
@@ -60,10 +82,10 @@ body{
   }
   &.option{
     background-color: none;
-    width: 120px;
+    width: 100%;
+    max-width: 140px;
     height: 30px;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding: 5px 10px;
     color: $highlight-orange;
     & .svg{
       height: 20px;
@@ -83,7 +105,6 @@ body{
     border-radius: 5rem;
     &.active{
       background-color: $royal-blue !important;
-      border: $accent-blue 2px solid !important;
       color: black !important;
       & .svg{
         filter: none;
@@ -110,6 +131,7 @@ body{
     justify-content: flex-start;
     gap: 10px;
     padding-top: 20px;
+    z-index: 9999999;
   }
 }
 .search-bar{
@@ -145,11 +167,13 @@ body{
   width: 20px;
  }
 }
+.filter-buton{
+  display: none;
+}
 // tables and its elements
 .responsive-table{
   width: 100%;
   max-width: none;
-  overflow: scroll;
   white-space: normal;
   border-collapse: collapse;
   border-spacing: 0;
@@ -189,6 +213,10 @@ body{
   & th, & td{
     padding: 20px 10px;
   }
+
+  .aux-text{
+    display: none;
+  }
 }
 .select-header-table{
   font-family: 'Inder';
@@ -217,6 +245,9 @@ body{
   padding-bottom: 20px;
   border-radius: 1rem;
   padding: 10px;
+  &:hover,:focus{
+    box-shadow: grey 1px 1px;
+  }
 }
 .chart-container{
   height: 60vh;
@@ -237,6 +268,7 @@ body{
   flex-direction: row;
   gap: 10px;
   align-items: center;
+  padding: 10px 0;
 }
 .pagination{
   color: #666;
@@ -249,6 +281,30 @@ body{
   align-items: center;
   justify-content: center;
 }}
+.filter-options-container{ &.responsive{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}}
+.panel-header{
+  display: flex !important;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  h1{
+    border-right: #666 1px solid;
+    padding: 0 10px;
+  }
+}
+
+@media (min-width: 900px) {
+  .filter-options-container{
+    &.responsive{
+      display: none;
+    }
+  }
+}
 @media (max-width: 900px) {
   .navbar{
     &.left{
@@ -261,6 +317,9 @@ body{
   .responsive-table{
     display: flex;
     flex-direction: column;
+    .aux-text{
+      display: unset;
+    }
     & thead{
       display: none;
     }
@@ -276,21 +335,48 @@ body{
   }
   tr{
     & td.product-image{
-      grid-area: "product-image";
+      grid-area: product-image;
     }
     & td.product-attribute{
-      grid-area: "product-attribute";
+      &.cod{
+        grid-area: product-code;
+      }
+      &.name{
+        grid-area: product-name;
+      }
+      &.cat{
+        grid-area: product-category;
+      }
+      &.type{
+        grid-area: product-type;
+      }
+      &.store{
+        grid-area: product-store;
+      }
+      &.amount{
+        grid-area: product-amount;
+      }
+
     }
     & td.product-actions{
-      grid-area: "product-actions";
+      grid-area: product-actions;
     }
     display: grid;
-    grid-template-areas: "product-image product-attribute product-attribute"
-                         "product-image product-attribute product-attribute"
-                         "product-image product-attribute product-attribute"
+    grid-template-areas: "product-image product-code product-name"
+                         "product-image product-type product-category"
+                         "product-image product-store product-amount"
                          "product-actions product-actions product-actions";
   }
 
+  }
+  .filter-buton{
+    display: unset;
+  }
+  .panel-header{
+    flex-direction: column;
+    h1{
+      border: none !important;
+    }
   }
 }
 

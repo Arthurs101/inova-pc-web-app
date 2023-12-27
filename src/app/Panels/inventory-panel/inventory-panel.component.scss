@@ -1,0 +1,70 @@
+@import "../../../styles/colors.scss";
+#pages{
+  grid-area: page-selector;
+}
+#filter{
+  grid-area: filter;
+}
+#inventory-options{
+ display: flex;
+}
+#inventory-filters{
+  grid-area: filter-options;
+}
+.interactive-button{
+  border: none !important;
+  .svg{
+    filter: $white-filter;
+  }
+  .button-text{
+    opacity: 0;
+    max-width: 0;
+    overflow: hidden;
+    transition: max-width 0.3s, opacity 0.3s ease-in-out;
+    font-size: 16px;
+    font-weight: 400;
+    color: white;
+  }
+  &:hover{
+    .button-text{
+    max-width: 200px; /* Ancho máximo para el texto */
+    opacity: 1;
+    }
+    box-shadow: grey 1px 1px;
+  }
+}
+#search{
+  grid-area: search-bar;
+}
+#show-products{
+  background-color: $royal-blue;
+}
+#new-product{
+  background-color: rgb(30, 152, 85);
+}
+#ask-product{
+  background-color: $highlight-orange;
+}
+
+
+@media (max-width: 900px) {
+  #inventory-options{
+    display: grid;
+    grid-template-areas: "search-bar search-bar"
+                          "page-selector filter"
+                          "filter-options filter-options";
+  }
+  .interactive-button{
+    .button-text{
+      max-width: 100px; /* Ancho máximo para el texto */
+      opacity: 1;
+      text-overflow: break-word;
+      font-size: small;
+      }
+      box-shadow: grey 1px 1px;
+  }
+  .options-container{
+    align-items: center;
+    justify-content: center;
+  }
+}

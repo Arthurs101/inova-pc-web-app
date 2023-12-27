@@ -1,26 +1,56 @@
 <div class="panel-container">
-  <!-- panel headline -->
-  <div class="panel-divider">
+  <div id="main-content">
+    <!-- panel headline -->
+  <div class="panel-header">
     <h1> Inventario </h1>
+    <div class="options-container" style="display: flex; flex-wrap: wrap; flex-direction: row; gap: 10px;">
+      <button class="simple-button square medium interactive-button" id="show-products">
+        <img class="svg" src="../../../assets/icons/alt-de-inventario.svg">
+        <span class="button-text">Todos los productos</span>
+      </button>
+      <button class="simple-button square medium interactive-button" id="new-product">
+        <img class="svg" src="../../../assets/icons/capa-mas.svg">
+        <span class="button-text">Crear nuevo producto</span>
+      </button>
+      <button class="simple-button square medium interactive-button" id="ask-product">
+        <img class="svg" src="../../../assets/icons/formulario.svg">
+        <span class="button-text">Solicitar producto</span>
+      </button>
+    </div>
   </div>
   <hr>
   <!-- panel content -->
   <div class="panel-content">
     <div class="card-container">
-      <div class="options-bar">
-        <select name="" id="" class="select-header-table" [(ngModel)]="itemsPerPage" (ngModelChange)="repaginate()" [value]="5">
+      <div class="options-bar" id="inventory-options">
+        <select name="search" id="pages" class="select-header-table" [(ngModel)]="itemsPerPage" (ngModelChange)="repaginate()" [value]="5">
           <option [value]="5">5 por página</option>
           <option [value]="10">10 por página</option>
           <option [value]="15">15 por página</option>
         </select>
-        <form class="search-bar-form">
+        <form class="search-bar-form" id="search">
           <img class="search-icon small" src="../../../assets/icons/search.svg">
-          <input class="search-bar" type="text" placeholder="Busqueda">
+          <input class="search-bar" type="text" placeholder="Busqueda" [(ngModel)]="searchQuery" (input)="onFilter()" [ngModelOptions]="{standalone: true}">
         </form>
+        <img src="../../../assets/icons/ajustes-deslizadores.svg" class="svg filter-buton {{isShowingFilters==true? 'active':'' || isHeaderVisible==false? 'active':'' }}"  id="filter" alt="filters" (click)="showFilters()">
+        <div class="filter-options-container responsive" id="inventory-filters" *ngIf="isShowingFilters">
+          <select name="" id="" class="select-header-table no-border" [(ngModel)]="filters.category" (ngModelChange)="onFilter()">
+            <option value="0">todas las categorías</option>
+            <option *ngFor="let cat of categories" [value]="cat">{{cat}}</option>
+          </select>
+          <select name="" id="" class="select-header-table no-border" [(ngModel)]="filters.category" (ngModelChange)="onFilter()">
+            <option value="0">todos los tipos</option>
+            <option *ngFor="let cat of categories" [value]="cat">{{cat}}</option>
+          </select>
+          <select name="" id="" class="select-header-table no-border" [(ngModel)]="filters.category" (ngModelChange)="onFilter()">
+            <option value="0">todas las ubicaciones</option>
+            <option *ngFor="let cat of categories" [value]="cat">{{cat}}</option>
+          </select>
+        </div>
       </div>
-      <div class="chart-container">
-        <table class="responsive-table">
-          <thead>
+      <div class="chart-container" id="inventory-chart">
+        <table class="responsive-table" id="inventory-table">
+          <thead (scroll)="onScroll($event)">
             <tr>
               <td></td>
               <td>codigo</td>
@@ -47,18 +77,19 @@
               <td></td>
             </tr>
           </thead>
-          <tbody>
+            <tbody >
               <tr *ngFor="let product of data">
                 <td class="product-image"><img src="../../../assets/logos/NoImage.png"></td>
-                <td class="product-attribute">{{product.codigo}}</td>
-                <td class="product-attribute">{{product.nombre}}</td>
-                <td class="product-attribute">{{product.categoria}}</td>
-                <td class="product-attribute">{{product.tipo}}</td>
-                <td class="product-attribute">{{product.ubicacion}}</td>
-                <td class="product-attribute">{{product.disponibles}}</td>
+                <td class="product-attribute cod">{{product.codigo}}</td>
+                <td class="product-attribute name">{{product.nombre}}</td>
+                <td class="product-attribute cat">{{product.categoria}}</td>
+                <td class="product-attribute type">{{product.tipo}}</td>
+                <td class="product-attribute store">{{product.ubicacion}}</td>
+                <td class="product-attribute amount"> <span class="aux-text">Disponibles</span> {{product.disponibles}}</td>
                 <td class="product-actions"></td>
               </tr>
           </tbody>
+
         </table>
       </div>
     </div>
@@ -73,4 +104,5 @@
     <button type="button" class="btn-pagination" [disabled]="currentPage === totalPages" (click)="nextPage()">Siguiente</button>
     <button type="button" class="btn-pagination" [disabled]="currentPage === totalPages" (click)="returnLastPage()">Final</button>
   </ul>
+  </div>
 </div>

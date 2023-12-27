@@ -3,9 +3,10 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-inventory-panel',
   templateUrl: './inventory-panel.component.html',
-  styleUrls: ['./inventory-panel.component.css']
+  styleUrls: ['./inventory-panel.component.scss']
 })
 export class InventoryPanelComponent implements OnInit {
+
   products: any[] = [
     {
       codigo: "001",
@@ -89,6 +90,8 @@ export class InventoryPanelComponent implements OnInit {
       disponibles: 20,
     },
   ];
+  searchQuery=""
+  isShowingFilters = false;
   filtered: any[];
   minIndex:number = 0
   maxIndex:number = 5
@@ -104,6 +107,15 @@ export class InventoryPanelComponent implements OnInit {
     this.filters = {category:"0",tipo:"0",ubicacion:"0",search:""}
   }
 
+  isHeaderVisible = true; // Estado para controlar la visibilidad
+
+  onScroll(event: Event) {
+    const container = event.target as HTMLElement; // Obtén el contenedor
+    const header = container.querySelector('thead') as HTMLElement; // Encuentra el thead
+
+    // Verifica si el thead es visible
+    this.isHeaderVisible = header.getBoundingClientRect().top >= 0;
+  }
 
   ngOnInit() {
     this.products.forEach((prod) =>{
@@ -121,9 +133,17 @@ export class InventoryPanelComponent implements OnInit {
       return 0
     }
   }
-
+  showFilters() {
+    this.isShowingFilters  = ! this.isShowingFilters ;
+  }
   onFilter(){
     this.filtered = this.products.filter((prod) => prod.categoria == this.filters.category || this.filters.category =="0")
+    if (this.searchQuery != ""){
+      let rgx_search = new RegExp(this.searchQuery.toLocaleUpperCase(), 'i')
+      this.filtered =this.filtered.filter((prod) => rgx_search.test(prod.categoria.toLocaleUpperCase())
+      || rgx_search.test(prod.nombre.toLocaleUpperCase())
+      || rgx_search.test(prod.codigo.toLocaleUpperCase()))
+    }
     this.data = this.filtered.slice(this.minIndex,this.maxIndex)
   }
 
