@@ -26,16 +26,23 @@ body{
   color: black;
   font-size: 40px;
   }
-
+.form-input{
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+}
 .simple-button{
-  border-radius: 5rem;
+  border-radius: 2rem;
   background-color: white;
   border-color: $royal-blue;
   padding: 10px 10px 10px 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-
+  font-family: 'Inder';
+  &.expand{
+    width: 100%;
+  }
   &:hover{
     background-color: $headlight-light-blue;
   }
@@ -44,6 +51,15 @@ body{
   }
   &.medium{
     height: 40px;
+  }
+  &.text{
+    border: none;
+    background-color: transparent !important;
+    color: #666;
+    &:hover{
+     color: $silver-blue;
+     text-decoration: underline $silver-blue;
+    }
   }
 }
 .btn-pagination{
@@ -56,6 +72,47 @@ body{
     color: black;
   }
 }
+.button-overlay{
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  &.big{
+    width: 200px;
+    height: 200px;
+  }
+  &.rounded{
+    border-radius: 2rem;
+    .overlay{
+      border-radius: inherit;
+    }
+  }
+  &.expand{
+    width: 100%;
+    height: 100%;
+  }
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    background-color: rgba(0, 0, 0, 0.7); /* Color del overlay */
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover {.overlay {
+    opacity: 1;
+  }}
+}
+
+
 .content-box{
   display: flex;
  &.vertical{
@@ -102,7 +159,7 @@ body{
     align-items: center;
     justify-content: flex-start;
     gap:10px;
-    border-radius: 5rem;
+    border-radius: 1em;
     &.active{
       background-color: $royal-blue !important;
       color: black !important;
@@ -275,6 +332,7 @@ body{
   font-family: 'Inder';
   font-weight: bold !important;
   font-size: 20px;
+  padding: 0;
 &.center-flex{
   display: flex !important;
   gap: 10px;

@@ -1,20 +1,23 @@
 <div class="panel-container">
-  <div id="main-content">
     <!-- panel headline -->
   <div class="panel-header">
-    <h1> Inventario </h1>
+    <h1> {{viewName}} </h1>
     <div class="options-container" style="display: flex; flex-wrap: wrap; flex-direction: row; gap: 10px;">
-      <button class="simple-button square medium interactive-button" id="show-products">
+      <button class="simple-button square medium interactive-button" id="show-products" (click)="setView('all-product','Todos los productos')" *ngIf="viewMode!='all-product'">
         <img class="svg" src="../../../assets/icons/alt-de-inventario.svg">
         <span class="button-text">Todos los productos</span>
       </button>
-      <button class="simple-button square medium interactive-button" id="new-product">
+      <button class="simple-button square medium interactive-button" id="new-product" (click)="setView('new-product','Nuevo producto')" *ngIf="viewMode!='new-product'">
         <img class="svg" src="../../../assets/icons/capa-mas.svg">
         <span class="button-text">Crear nuevo producto</span>
       </button>
-      <button class="simple-button square medium interactive-button" id="ask-product">
+      <button class="simple-button square medium interactive-button" id="ask-product" (click)="setView('ask-product','Solicitar producto')" *ngIf="viewMode!='ask-product'">
         <img class="svg" src="../../../assets/icons/formulario.svg">
         <span class="button-text">Solicitar producto</span>
+      </button>
+      <button class="simple-button square medium interactive-button" id="inventory-button" (click)="setView('inventory','Inventario')" *ngIf="viewMode!='inventory'">
+        <img class="svg" src="../../../assets/icons/formulario.svg">
+        <span class="button-text">Ver inventario</span>
       </button>
     </div>
   </div>
@@ -22,7 +25,7 @@
   <!-- panel content -->
   <div class="panel-content">
     <div class="card-container">
-      <div class="options-bar" id="inventory-options">
+      <div class="options-bar" id="inventory-options" *ngIf="viewMode!='new-product'">
         <select name="search" id="pages" class="select-header-table" [(ngModel)]="itemsPerPage" (ngModelChange)="repaginate()" [value]="5">
           <option [value]="5">5 por página</option>
           <option [value]="10">10 por página</option>
@@ -32,7 +35,7 @@
           <img class="search-icon small" src="../../../assets/icons/search.svg">
           <input class="search-bar" type="text" placeholder="Busqueda" [(ngModel)]="searchQuery" (input)="onFilter()" [ngModelOptions]="{standalone: true}">
         </form>
-        <img src="../../../assets/icons/ajustes-deslizadores.svg" class="svg filter-buton {{isShowingFilters==true? 'active':'' || isHeaderVisible==false? 'active':'' }}"  id="filter" alt="filters" (click)="showFilters()">
+        <img src="../../../assets/icons/ajustes-deslizadores.svg" class="svg filter-buton {{isShowingFilters==true? 'active':''}}"  id="filter" alt="filters" (click)="showFilters()">
         <div class="filter-options-container responsive" id="inventory-filters" *ngIf="isShowingFilters">
           <select name="" id="" class="select-header-table no-border" [(ngModel)]="filters.category" (ngModelChange)="onFilter()">
             <option value="0">todas las categorías</option>
@@ -48,9 +51,10 @@
           </select>
         </div>
       </div>
-      <div class="chart-container" id="inventory-chart">
-        <table class="responsive-table" id="inventory-table">
-          <thead (scroll)="onScroll($event)">
+      <!-- tabla de inventario -->
+      <div class="chart-container" id="inventory-chart" *ngIf="viewMode=='inventory'">
+        <table class="responsive-table" id="inventory-table" >
+          <thead>
             <tr>
               <td></td>
               <td>codigo</td>
@@ -92,12 +96,43 @@
 
         </table>
       </div>
+
+      <!-- formulario de nuevo producto -->
+      <form *ngIf="viewMode=='new-product'" id="new-product-form">
+        <div class="button-overlay big rounded" style="background-image: url(../../../assets/logos/NoImage.png);">
+          <div class="overlay">
+            <p>Agregar imagen</p>
+            <button class="simple-button">Subir</button>
+          </div>
+        </div>
+        <div id="inputs-container">
+          <div class="form-input">
+            <label for="new-product-name">Nombre del producto</label>
+            <input type="text" id="new-product-name" placeholder="nombre">
+          </div>
+
+
+          <div class="form-input">
+          <label for="new-product-name">Precio del producto</label>
+          <input type="number" id="new-product-name" step='0.01' placeholder="0.00">
+          </div>
+
+
+
+
+          <select name="" id="category-new-product">
+          <option value="NULL">Seleccionar categoria</option>
+
+
+        </select>
+        </div>
+      </form>
+
     </div>
 
-  </div>
 
   <!-- pagination buttons -->
-  <ul class="pagination center-flex" uk-margin>
+  <ul class="pagination center-flex" *ngIf="viewMode!='new-product'">
     <button type="button" class="btn-pagination " [disabled]="currentPage===1" (click)="returnFirstPage()" >Inicio</button>
     <button type="button" class="btn-pagination " [disabled]="currentPage === 1" (click)="prevPage()">Anterior</button>
     <span class="pagination-indicator">{{ currentPage }} / {{ totalPages }}</span>

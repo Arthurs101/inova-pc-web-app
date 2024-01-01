@@ -90,6 +90,9 @@ export class InventoryPanelComponent implements OnInit {
       disponibles: 20,
     },
   ];
+
+  viewMode=""
+  viewName=""
   searchQuery=""
   isShowingFilters = false;
   filtered: any[];
@@ -100,21 +103,16 @@ export class InventoryPanelComponent implements OnInit {
   categories: any[];
   data:any[] = [];
   filters:{category: string, tipo: string,ubicacion: string, search:string}
+
+
+
   constructor() {
     this.filtered = this.products;
     this.categories = []
     this.data = this.products
     this.filters = {category:"0",tipo:"0",ubicacion:"0",search:""}
-  }
-
-  isHeaderVisible = true; // Estado para controlar la visibilidad
-
-  onScroll(event: Event) {
-    const container = event.target as HTMLElement; // Obtén el contenedor
-    const header = container.querySelector('thead') as HTMLElement; // Encuentra el thead
-
-    // Verifica si el thead es visible
-    this.isHeaderVisible = header.getBoundingClientRect().top >= 0;
+    this.viewMode = "new-product"
+    this.viewName = "Nuevo producto"
   }
 
   ngOnInit() {
@@ -136,6 +134,12 @@ export class InventoryPanelComponent implements OnInit {
   showFilters() {
     this.isShowingFilters  = ! this.isShowingFilters ;
   }
+
+  setView (view: string , name: string) {
+    this.viewMode = view
+    this.viewName = name
+  }
+
   onFilter(){
     this.filtered = this.products.filter((prod) => prod.categoria == this.filters.category || this.filters.category =="0")
     if (this.searchQuery != ""){
