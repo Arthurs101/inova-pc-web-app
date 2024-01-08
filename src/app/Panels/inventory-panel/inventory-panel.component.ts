@@ -1,10 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
+import { InnovaPCService } from 'src/app/services/innovapc.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-inventory-panel',
   templateUrl: './inventory-panel.component.html',
   styleUrls: ['./inventory-panel.component.scss']
 })
+
+@Injectable({
+  providedIn: 'root'
+})
+
 export class InventoryPanelComponent implements OnInit {
 
   products: any[] = [
@@ -103,10 +110,11 @@ export class InventoryPanelComponent implements OnInit {
   categories: any[];
   data:any[] = [];
   filters:{category: string, tipo: string,ubicacion: string, search:string}
+  newProd: { name: string; category: string; precio: string; attributes: [{ key: string; value: string; }]; } | undefined
 
 
 
-  constructor() {
+  constructor(private service: InnovaPCService) {
     this.filtered = this.products;
     this.categories = []
     this.data = this.products
@@ -115,12 +123,8 @@ export class InventoryPanelComponent implements OnInit {
     this.viewName = "Nuevo producto"
   }
 
-  ngOnInit() {
-    this.products.forEach((prod) =>{
-      if (!this.categories.includes(prod.categoria)){
-        this.categories.push(prod.categoria)
-      }
-    })
+  async ngOnInit() {
+    this.fetchData()
     this.data = this.filtered.slice(this.minIndex,this.maxIndex)
   }
 
@@ -131,6 +135,17 @@ export class InventoryPanelComponent implements OnInit {
       return 0
     }
   }
+
+   async fetchData(){
+    var categories = await this.service.getProdCategories()
+    if (categories.type == "error") {
+      Swal.fire('No se pudo obtener las catagorías', String(categories.value) , 'error')
+    }else{
+      this.categories = categories.value
+    }
+    console.log(categories)
+  }
+
   showFilters() {
     this.isShowingFilters  = ! this.isShowingFilters ;
   }

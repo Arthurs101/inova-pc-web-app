@@ -117,15 +117,25 @@
           <input type="number" id="new-product-name" step='0.01' placeholder="0.00">
           </div>
 
-
-
-
           <select name="" id="category-new-product">
           <option value="NULL">Seleccionar categoria</option>
+          <option *ngFor="let category of categories" [value]="category['id']"> {{category['nombre']}}</option>
+
+          <label for="new-product-name">Precio del producto</label>
+          <input type="number" id="new-product-name" step='0.01' placeholder="0.00">
+<!--
+          <div *ngFor="let attribute in newProd.attributes" class="form-input">
+            <label for="new-product-name">Precio del producto</label>
+            <input type="number" id="new-product-name" step='0.01' placeholder="0.00">
+          </div> -->
 
 
         </select>
         </div>
+        <button class="simple-button square medium interactive-button" id="new-product" >
+          <img class="svg" src="../../../assets/icons/capa-mas.svg">
+          <span class="button-text">Crear nuevo producto</span>
+        </button>
       </form>
 
     </div>
