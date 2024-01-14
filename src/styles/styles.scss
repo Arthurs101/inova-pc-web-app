@@ -33,18 +33,20 @@ body{
 }
 .simple-button{
   border-radius: 2rem;
-  background-color: white;
+  background-color: $headlight-light-blue;
   border-color: $royal-blue;
   padding: 10px 10px 10px 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: 'Inder';
+  color: $silver-blue;
   &.expand{
     width: 100%;
   }
   &:hover{
-    background-color: $headlight-light-blue;
+    background-color: $royal-blue;
+    color:  $soft-grey;
   }
   &.square{
     border-radius: 10%;
@@ -343,6 +345,8 @@ body{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  border-radius: 1rem;
+  border-width: 2px;
 }}
 .panel-header{
   display: flex !important;
@@ -368,6 +372,9 @@ body{
     &.left{
       display: none;
     }
+  }
+  .panel-container{
+    padding: 0;
   }
   .panel-display{
     width: 100%;

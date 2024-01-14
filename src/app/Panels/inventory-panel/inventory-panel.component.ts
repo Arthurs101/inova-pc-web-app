@@ -1,4 +1,4 @@
-import { Component, Injectable, OnInit } from '@angular/core';
+import { Component, ElementRef, Injectable, OnInit, ViewChild } from '@angular/core';
 import { InnovaPCService } from 'src/app/services/innovapc.service';
 import Swal from 'sweetalert2';
 
@@ -12,7 +12,11 @@ import Swal from 'sweetalert2';
   providedIn: 'root'
 })
 
+
+
 export class InventoryPanelComponent implements OnInit {
+  @ViewChild('new-prod-image') newProdImageInput!: ElementRef;
+  @ViewChild('prod-image') newProdImage!: ElementRef;
 
   products: any[] = [
     {
@@ -110,7 +114,9 @@ export class InventoryPanelComponent implements OnInit {
   categories: any[];
   data:any[] = [];
   filters:{category: string, tipo: string,ubicacion: string, search:string}
-  newProd: { name: string; category: string; precio: string; attributes: [{ key: string; value: string; }]; } | undefined
+  newProd: { name: string; category: string; precio: string; attributes: { key: string; value: string; }[]; }
+  imagePath: any;
+  url: string | ArrayBuffer | null = "";
 
 
 
@@ -121,6 +127,7 @@ export class InventoryPanelComponent implements OnInit {
     this.filters = {category:"0",tipo:"0",ubicacion:"0",search:""}
     this.viewMode = "new-product"
     this.viewName = "Nuevo producto"
+    this.newProd = {name:"", category:"", precio:"", attributes:[]}
   }
 
   async ngOnInit() {
@@ -154,6 +161,32 @@ export class InventoryPanelComponent implements OnInit {
     this.viewMode = view
     this.viewName = name
   }
+
+  // renders the image selected on a new product
+  imageUrl: string | ArrayBuffer | null = '../../../assets/logos/NoImage.png';
+
+  handleImageChange(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        let result = e.target?.result;
+        if (result){
+          this.imageUrl = result
+        }
+      };
+
+      reader.readAsDataURL(file);
+    }
+  }
+
+onCancelNewProd(){
+  this.imageUrl = '../../../assets/logos/NoImage.png'
+  this.setView('inventory','Inventario')
+  Swal.fire('Realizado','Se ha cancelado correctamente la creación del producto','info')
+}
+
 
   onFilter(){
     this.filtered = this.products.filter((prod) => prod.categoria == this.filters.category || this.filters.category =="0")

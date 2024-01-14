@@ -61,14 +61,14 @@
               <td>nombre</td>
               <td>
                 <select name="" id="" class="select-header-table no-border" [(ngModel)]="filters.category" (ngModelChange)="onFilter()">
-                  <option value="0">categoria</option>
-                  <option *ngFor="let cat of categories" [value]="cat">{{cat}}</option>
+                  <option value="0">Categoría</option>
+                  <option *ngFor="let cat of categories" [value]="cat['id']">{{cat['nombre']}}</option>
                 </select>
               </td>
               <td>
                 <select name="" id="" class="select-header-table no-border" [(ngModel)]="filters.category" (ngModelChange)="onFilter()">
                   <option value="0">tipo</option>
-                  <option *ngFor="let cat of categories" [value]="cat">{{cat}}</option>
+                  <option *ngFor="let cat of categories" [value]="cat['id']">{{cat['nombre']}}</option>
                 </select>
               </td>
               <td>
@@ -99,10 +99,27 @@
 
       <!-- formulario de nuevo producto -->
       <form *ngIf="viewMode=='new-product'" id="new-product-form">
-        <div class="button-overlay big rounded" style="background-image: url(../../../assets/logos/NoImage.png);">
-          <div class="overlay">
-            <p>Agregar imagen</p>
-            <button class="simple-button">Subir</button>
+        <div id="splitter" style="display: flex; flex-direction: column; align-items: center; gap:10px;">
+          <div id="new-product-actions">
+            <button title="Agregar caracteristica" class="simple-button square medium interactive-button no-expand" id="new-char" >
+              <img class="svg" src="../../../assets/icons/square-plus.svg">
+              <span class="button-text">Agregar campo</span>
+            </button>
+            <button title="Guardar" class="simple-button square medium interactive-button no-expand" id="save-new" >
+              <img class="svg" src="../../../assets/icons/disk.svg">
+              <span class="button-text">Guardar</span>
+            </button>
+            <button title="Cancelar" class="simple-button square medium interactive-button no-expand" id="cancel-new" (click)="onCancelNewProd()" >
+              <img class="svg" src="../../../assets/icons/rectangle-xmark.svg">
+              <span class="button-text">Cancelar</span>
+            </button>
+          </div>
+          <div id="prod-image" class="button-overlay big rounded" [style.backgroundImage]="'url(' + imageUrl + ')'">
+            <div class="overlay">
+              <p>Agregar imagen</p>
+              <input type="file" id="new-prod-image" accept="image/*"  style="display:none;" (change)="handleImageChange($event)"/>
+              <label for="new-prod-image" class="simple-button">Seleccionar</label>
+            </div>
           </div>
         </div>
         <div id="inputs-container">
@@ -117,25 +134,26 @@
           <input type="number" id="new-product-name" step='0.01' placeholder="0.00">
           </div>
 
-          <select name="" id="category-new-product">
-          <option value="NULL">Seleccionar categoria</option>
-          <option *ngFor="let category of categories" [value]="category['id']"> {{category['nombre']}}</option>
+          <div class="form-input">
+            <label for="category-new-product">Categoria del producto</label>
+            <select name="" id="category-new-product">
+              <option value="NULL">Seleccionar</option>
+              <option *ngFor="let category of categories" [value]="category['id']"> {{category['nombre']}}</option>
+              </select>
+          </div>
 
+
+          <div class="form-input">
           <label for="new-product-name">Precio del producto</label>
           <input type="number" id="new-product-name" step='0.01' placeholder="0.00">
-<!--
-          <div *ngFor="let attribute in newProd.attributes" class="form-input">
+          </div>
+
+          <div *ngFor="let attribute of newProd.attributes" class="form-input">
             <label for="new-product-name">Precio del producto</label>
             <input type="number" id="new-product-name" step='0.01' placeholder="0.00">
-          </div> -->
+          </div>
 
-
-        </select>
         </div>
-        <button class="simple-button square medium interactive-button" id="new-product" >
-          <img class="svg" src="../../../assets/icons/capa-mas.svg">
-          <span class="button-text">Crear nuevo producto</span>
-        </button>
       </form>
 
     </div>
